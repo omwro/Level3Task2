@@ -4,6 +4,6 @@
     <!-- Strings used for fragments for navigation -->
     <string name="placeholder_text">Placeholder Text</string>
     <string name="title">Title</string>
-    <string name="ulr">Url</string>
+    <string name="url">Url</string>
     <string name="add_portal">ADD PORTAL</string>
 </resources>
