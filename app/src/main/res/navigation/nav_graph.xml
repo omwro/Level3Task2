@@ -10,16 +10,16 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            android:id="@+id/action_homeFragment_to_addPortalFragment"
+            app:destination="@id/addPortalFragment" />
     </fragment>
     <fragment
-        android:id="@+id/addFragment"
-        android:name="nl.omererdem.madlevel3task2.AddFragment"
-        android:label="fragment_add"
-        tools:layout="@layout/fragment_add" >
+        android:id="@+id/addPortalFragment"
+        android:name="nl.omererdem.madlevel3task2.AddPortalFragment"
+        android:label="fragment_add_portal"
+        tools:layout="@layout/fragment_add_portal" >
         <action
-            android:id="@+id/action_addFragment_to_homeFragment"
+            android:id="@+id/action_addPortalFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

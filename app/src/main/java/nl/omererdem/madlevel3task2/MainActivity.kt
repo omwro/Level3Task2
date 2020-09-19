@@ -8,10 +8,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
+// Global variable states for the portals
 val portals = arrayListOf<Portal>()
 val portalAdapter = PortalAdapter(portals)
 
 class MainActivity : AppCompatActivity() {
+    // The navigation controller
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,12 +21,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        // Define the navigation controller
         navController = findNavController(R.id.nav_host_fragment)
 
+        // Navigate to other fragment on FAB click
         fab.setOnClickListener {
-            navController.navigate(R.id.action_homeFragment_to_addFragment)
+            navController.navigate(R.id.action_homeFragment_to_addPortalFragment)
         }
 
+        // Toggle display the FAB
         fabToggler()
     }
 
@@ -44,10 +49,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Hide the FAB if the add fragment is the destination fragment
     private fun fabToggler() {
         findNavController(R.id.nav_host_fragment).addOnDestinationChangedListener {
                 _, destination, _ ->
-            if (destination.id in arrayListOf(R.id.addFragment)) {
+            if (destination.id in arrayListOf(R.id.addPortalFragment)) {
                 fab.hide()
             } else {
                 fab.show()

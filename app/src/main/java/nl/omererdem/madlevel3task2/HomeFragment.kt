@@ -1,7 +1,6 @@
 package nl.omererdem.madlevel3task2
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,13 +23,14 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    // Run necessary functions on view created
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
-        observeAddPortalResult()
     }
 
+    // On initializing view, setup the recyclerview and touch helper for the portal cards
     private fun initViews() {
         rvPortals.layoutManager = GridLayoutManager(context, 2)
         rvPortals.adapter = portalAdapter
@@ -38,18 +38,7 @@ class HomeFragment : Fragment() {
         createItemTouchHelper().attachToRecyclerView(rvPortals)
     }
 
-    private fun observeAddPortalResult() {
-        val portalTitle = arguments?.getString(PORTAL_TITLE)
-        val portalUrl = arguments?.getString(PORTAL_URL)
-        if (portalTitle != null && portalUrl != null) {
-            Log.i("1", portals.toString())
-            Log.i("2", Portal(portalTitle, portalUrl).toString())
-            portals.add(Portal(portalTitle, portalUrl))
-            portalAdapter.notifyDataSetChanged()
-            Log.i("3", portals.toString())
-        }
-    }
-
+    // Touch helper for the portal cards for a right swipe
     private fun createItemTouchHelper(): ItemTouchHelper {
         val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             override fun onMove(
@@ -60,6 +49,7 @@ class HomeFragment : Fragment() {
                 return false
             }
 
+            // Delete the card on swipe
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 portals.removeAt(position)
