@@ -1,6 +1,7 @@
 package nl.omererdem.madlevel3task2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,8 +15,6 @@ import kotlinx.android.synthetic.main.fragment_home.*
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
 class HomeFragment : Fragment() {
-    private val portals = arrayListOf<Portal>()
-    private val portalAdapter = PortalAdapter(portals)
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -43,8 +42,11 @@ class HomeFragment : Fragment() {
         val portalTitle = arguments?.getString(PORTAL_TITLE)
         val portalUrl = arguments?.getString(PORTAL_URL)
         if (portalTitle != null && portalUrl != null) {
+            Log.i("1", portals.toString())
+            Log.i("2", Portal(portalTitle, portalUrl).toString())
             portals.add(Portal(portalTitle, portalUrl))
             portalAdapter.notifyDataSetChanged()
+            Log.i("3", portals.toString())
         }
     }
 

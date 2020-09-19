@@ -8,6 +8,9 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import kotlinx.android.synthetic.main.activity_main.*
 
+val portals = arrayListOf<Portal>()
+val portalAdapter = PortalAdapter(portals)
+
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
 
