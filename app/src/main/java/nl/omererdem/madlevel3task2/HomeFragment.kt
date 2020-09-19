@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -34,6 +35,8 @@ class HomeFragment : Fragment() {
     private fun initViews() {
         rvPortals.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         rvPortals.adapter = portalAdapter
+
+        createItemTouchHelper().attachToRecyclerView(rvPortals)
     }
 
     private fun observeAddPortalResult() {
@@ -43,5 +46,24 @@ class HomeFragment : Fragment() {
             portals.add(Portal(portalTitle, portalUrl))
             portalAdapter.notifyDataSetChanged()
         }
+    }
+
+    private fun createItemTouchHelper(): ItemTouchHelper {
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                portals.removeAt(position)
+                portalAdapter.notifyDataSetChanged()
+            }
+        }
+        return ItemTouchHelper(callback)
     }
 }
