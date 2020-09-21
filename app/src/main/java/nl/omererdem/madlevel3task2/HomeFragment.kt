@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -28,6 +29,17 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initViews()
+        observeAddReminderResult()
+    }
+
+    private fun observeAddReminderResult() {
+        setFragmentResultListener(PORTAL_KEY) {
+            key, bundle ->
+            bundle.getParcelable<Portal>(BUNDLE_KEY)?.let {
+                portals.add(it)
+                portalAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
     // On initializing view, setup the recyclerview and touch helper for the portal cards
